@@ -1,30 +1,21 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.13;
+pragma solidity ^0.8.28;
 
 import {Test, console} from "forge-std/Test.sol";
-import {Counter} from "../src/Counter.sol";
+import {Rabbits} from "../src/Rabbits721.sol";
 
-contract CounterTest is Test {
-    Counter public counter;
+contract RabbitsTest is Test {
+    Rabbits public rabbits;
+    string public baseURI;
 
     function setUp() public {
-        counter = new Counter();
-        counter.setNumber(0);
+        baseURI = "https://gateway.decentralizedscience.org/ipfs/";
+        rabbits = new Rabbits(address(this), address(this));
     }
 
-    function test_Increment() public {
-        counter.increment();
-        assertEq(counter.number(), 1);
-    }
-
-    function testFuzz_SetNumber(uint256 x) public {
-        counter.setNumber(x);
-        assertEq(counter.number(), x);
-    }
-
-    function test_Decrement() public {
-        counter.setNumber(1);
-        counter.decrement();
-        assertEq(counter.number(),0);
+    function testMint() public {
+        rabbits.safeMint(address(0x1), "abc");
+        assertEq(rabbits.ownerOf(0), address(0x1),
+                 "Token should be minted to specified address.");
     }
 }
