@@ -31,4 +31,10 @@ contract RabbitsTest is Test {
         assertEq(rabbits.ownerOf(0), address(0x1),
                  "Token should be minted to specified address.");
     }
+
+    function testGetURI9() public {
+        rabbits.safeMint(address(0x1), NFTs[9]);
+        string memory tokenURI = rabbits.tokenURI(0);
+        assertEq(tokenURI, string.concat(baseURI, NFTs[9]));
+    }
 }
