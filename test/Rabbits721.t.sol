@@ -57,4 +57,19 @@ contract RabbitsTest is Test {
 
         assertEq(mintedNFTs.length, rabbits.totalSupply());
     }
+
+    function testEnumerableTokenByIndex() public {
+        for ( uint256 i = 0; i < NFTs.length; i++) {
+            rabbits.safeMint(address(1), NFTs[i]);
+        }
+
+        assertEq(NFTs.length, rabbits.totalSupply());
+
+        uint256 tokenID = rabbits.tokenByIndex(4);
+        assertEq(NFTs[4], NFTs[tokenID]);
+
+        tokenID = rabbits.tokenByIndex(3);
+        assertEq(NFTs[3], NFTs[tokenID]);
+    }
+
 }
