@@ -37,4 +37,11 @@ contract RabbitsTest is Test {
         string memory tokenURI = rabbits.tokenURI(0);
         assertEq(tokenURI, string.concat(baseURI, NFTs[9]));
     }
+
+    function test_RevertTokenIndex() public {
+        //vm.expectRevert(ERC721NonexistentToken.selector);
+        vm.expectRevert();
+        rabbits.tokenURI(0);
+
+    }
 }
