@@ -42,6 +42,19 @@ contract RabbitsTest is Test {
         //vm.expectRevert(ERC721NonexistentToken.selector);
         vm.expectRevert();
         rabbits.tokenURI(0);
+    }
 
+    function testEnumerableTotalSupply() public {
+        string[5] memory mintedNFTs;
+
+        for (uint256 i = 0; i < 5; i++){
+            mintedNFTs[i] = NFTs[i];
+        }
+
+        for( uint256 i = 0; i < mintedNFTs.length; i++){
+            rabbits.safeMint(address(1),mintedNFTs[i]);
+        }
+
+        assertEq(mintedNFTs.length, rabbits.totalSupply());
     }
 }
