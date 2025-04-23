@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0
 // Compatible with OpenZeppelin Contracts ^5.0.0
-pragma solidity ^0.8.22;
+pragma solidity ^0.8.28;
 
 import {AccessControl} from "@openzeppelin/contracts/access/AccessControl.sol";
 import {EIP712} from "@openzeppelin/contracts/utils/cryptography/EIP712.sol";
