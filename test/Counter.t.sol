@@ -21,4 +21,10 @@ contract CounterTest is Test {
         counter.setNumber(x);
         assertEq(counter.number(), x);
     }
+
+    function test_Decrement() public {
+        counter.setNumber(1);
+        counter.decrement();
+        assertEq(counter.number(),0);
+    }
 }
