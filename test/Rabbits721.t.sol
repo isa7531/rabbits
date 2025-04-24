@@ -89,4 +89,9 @@ contract RabbitsTest is Test {
             assertEq(rabbits.tokenURI(token_id), string.concat(baseURI, NFTs[token_id]));
         }
     }
-}
+
+    function test_RevertMintToZeroAddress() public {
+        vm.expectRevert();
+        rabbits.safeMint(address(0), NFTs[0]);
+    }
+  }
