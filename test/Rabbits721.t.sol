@@ -72,4 +72,21 @@ contract RabbitsTest is Test {
         assertEq(NFTs[3], NFTs[tokenID]);
     }
 
+    function testEnumerableTokenOfOwnerByIndex() public {
+        for (uint256 i; i < NFTs.length; i++){
+            if( i % 2 == 0) {
+                rabbits.safeMint(address(1), NFTs[i]);
+            } else {
+                rabbits.safeMint(address(2), NFTs[i]);
+            }
+        }
+
+        uint256 account1_balance = rabbits.balanceOf(address(1));
+        assertEq(account1_balance, 5);
+
+        for (uint256 i; i < account1_balance; i++) {
+            uint256 token_id = rabbits.tokenOfOwnerByIndex(address(1), i);
+            assertEq(rabbits.tokenURI(token_id), string.concat(baseURI, NFTs[token_id]));
+        }
+    }
 }
