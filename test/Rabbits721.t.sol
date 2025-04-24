@@ -94,4 +94,15 @@ contract RabbitsTest is Test {
         vm.expectRevert();
         rabbits.safeMint(address(0), NFTs[0]);
     }
+
+    function testMintAll() public {
+        for (uint256 i; i < NFTs.length; i++){
+            rabbits.safeMint(address(uint160(i + 1)), NFTs[i]);
+        }
+
+        for (uint256 i; i < NFTs.length; i++) {
+            uint256 token_id = rabbits.tokenOfOwnerByIndex(address(uint160(i + 1)), 0);
+            assertEq(string.concat(baseURI, NFTs[i]), rabbits.tokenURI(token_id));
+        }
+    }
   }
